@@ -1,74 +1,38 @@
 # Brenden Overstreet | DLM: 5-10-2024 | v1.0.0
 # This program allows a user to enter the players stats and it relays the percentages back to them
-# Code used from ButtonClicker1.py made by Ryan Russell
 
+# Imports tkinter as tk in to the python file
 import tkinter as tk
-import math
+from sportsTR_math import SportsStatsCalculator
 
+# This creates the main window class that opens the program
 class MainWindow:
-    def __init__(self):
-        
-        self.root = tk.Tk()
-        self.root.title("Sports Tracker")
-        self.root.geometry("400x400")
-
-        self.label = tk.Label(self.root, text="Basketball")
-        self.label.pack(pady=10)
-
-        self.button = tk.Button(self.root, text="Open", command=self.open_basketball_window)
-        self.button.pack(pady=10)
-
-        self.label = tk.Label(self.root, text="Football")
-        self.label.pack(pady=20)
-
-        self.button = tk.Button(self.root, text="Open", command=self.open_football_window)
-        self.button.pack(pady=20)
-
-        self.label = tk.Label(self.root, text="Baseball")
-        self.label.pack(pady=30)
-
-        self.button = tk.Button(self.root, text="Open", command=self.open_baseball_window)
-        self.button.pack(pady=30)
-                                
-    def open_basketball_window(self):
-        self.basketball_window = BasketballWindow(self.root, self)
-
-    def open_football_window(self):
-        self.football_window = FootballWindow(self.root, self)
-
-    def open_baseball_window(self):
-        self.baseball_window = BaseballWindow(self.root, self)
-
-    def run(self):
-        self.root.mainloop()
-
-class BasketballWindow:
-    def __init__(self, master, main_window):
+    def __init__(self, master):
         self.master = master
-        self.main_window = main_window
-        
-        self.top = tk.Toplevel(self.master)
-        self.top.title("Basketball")
-        self.top.geometry("400x400")
+        self.master.title("Main Window")
+        self.create_widgets()
+    # This creates the sub windows
+    def create_widgets(self):
+        sports = ["Football", "Baseball", "Basketball"]
+        for sport in sports:
+            tk.Button(self.master, text=f"Open {sport} Calculator", command=lambda sport=sport: self.open_calculator(sport)).pack(pady=5)
+        # This creates a button that closes the windows
+        close_button = tk.Button(self.master, text="Close Main Window", command=self.master.destroy)
+        close_button.pack(pady=10)
+    # This defines the calculator that is in the window you choose to open
+    def open_calculator(self, sport):
+        calculator_window = tk.Toplevel(self.master)
+        app = SportsStatsCalculator(calculator_window, sport)
+# Define the main function to run the gui
+def main():
+    root = tk.Tk()
+    app = MainWindow(root)
+    root.mainloop()
+# Runs the gui
+if __name__ == "__main__":
+    main()
 
-class FootballWindow:
-    def __init__(self, master, main_window):
-        self.master = master
-        self.main_window = main_window
-        
-        self.top = tk.Toplevel(self.master)
-        self.top.title("Football")
-        self.top.geometry("400x400")
 
-class BaseballWindow:
-    def __init__(self, master, main_window):
-        self.master = master
-        self.main_window = main_window
-        
-        self.top = tk.Toplevel(self.master)
-        self.top.title("Baseball")
-        self.top.geometry("400x400")
 
-if __name__ == '__main__':
-    main_window = MainWindow()
-    main_window.run()
+
+
