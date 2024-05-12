@@ -14,11 +14,11 @@ class SportsStatsCalculator:
     def create_widgets(self):
         tk.Label(self.master, text=f"Enter {self.sport} stats:").grid(row=0, column=0, padx=10, pady=5, sticky="w")
 
-        tk.Label(self.master, text="Goals/Runs/Points Scored:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
+        tk.Label(self.master, text="Field Goals Made/Hits/Free Throws Made:").grid(row=1, column=0, padx=10, pady=5, sticky="w")
         self.score_entry = tk.Entry(self.master)
         self.score_entry.grid(row=1, column=1, padx=10, pady=5)
 
-        tk.Label(self.master, text="Total Shots/At-bats/Field Goals Attempted:").grid(row=2, column=0, padx=10, pady=5, sticky="w")
+        tk.Label(self.master, text="Total Free Throws/At-bats/Field Goals Attempted:").grid(row=2, column=0, padx=10, pady=5, sticky="w")
         self.shots_entry = tk.Entry(self.master)
         self.shots_entry.grid(row=2, column=1, padx=10, pady=5)
 
@@ -37,19 +37,19 @@ class SportsStatsCalculator:
             score = float(score)
             shots = float(shots)
         except ValueError:
-            messagebox.showerror("Error", "Please enter valid numeric values for score and shots.")
+            messagebox.showerror("Error", "Please enter valid numeric values for attempts and makes/hits.")
             return
 
         if shots == 0:
-            messagebox.showerror("Error", "Total shots/At-bats/Field Goals Attempted cannot be zero.")
+            messagebox.showerror("Error", "Total Free Throws/At-bats/Field Goals Attempted cannot be zero.")
             return
 
         if self.sport == "Football":
             percentage = (score / shots) * 100
-            messagebox.showinfo("Result", f"Scoring Percentage: {percentage:.2f}%")
+            messagebox.showinfo("Result", f"Field Goal Percentage: {percentage:.2f}%")
         elif self.sport == "Baseball":
             batting_avg = score / shots
             messagebox.showinfo("Result", f"Batting Average: {batting_avg:.3f}")
         elif self.sport == "Basketball":
             shooting_percentage = (score / shots) * 100
-            messagebox.showinfo("Result", f"Shooting Percentage: {shooting_percentage:.2f}%")
+            messagebox.showinfo("Result", f"Free Throw Percentage: {shooting_percentage:.2f}%")

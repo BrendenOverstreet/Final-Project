@@ -1,4 +1,4 @@
-# Brenden Overstreet | DLM: 5-10-2024 | v1.0.0
+# Brenden Overstreet | DLM: 5-12-2024 | v1.2.1
 # This program allows a user to enter the players stats and it relays the percentages back to them
 
 # Imports tkinter as tk in to the python file
